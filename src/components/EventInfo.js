@@ -4,15 +4,12 @@ import { getDatabase, ref, push } from 'firebase/database'
 
 const EventInfo = ({ eventArray, listKey, updatePrice }) => {
 
-
     const database = getDatabase(firebase);
     const dbRef = ref(database, `/${listKey}/concert`);
 
     const addEvent = (eventItem) => {
         push(dbRef, eventItem);
     }
-
-
 
     return (
         <div className='searchResultsContainer'>
@@ -26,7 +23,6 @@ const EventInfo = ({ eventArray, listKey, updatePrice }) => {
                                 <div className="imgContainer">
                                     <img src={singleEvent.images[0].url} alt={`a poster for ${singleEvent.name}`} />
                                 </div>
-                                {/* {props.children} */}
                                 <p>{singleEvent.dates.start.localDate} at {singleEvent.dates.start.localTime}</p>
 
                                 <p>${singleEvent.priceRanges[0].min}</p>

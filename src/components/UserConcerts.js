@@ -21,7 +21,6 @@ const UserConcerts = ({ listName, listBudget, listId, listConcerts }) => {
     concertKeys.shift()
 
     // sortting the array with the highest price to lowest
-    // displayConcertsArray.sort(function (a, b) { return b.priceRanges[0].min - a.priceRanges[0].min });
 
     const removingConcerts = ((listId, concert) => {
 
@@ -39,7 +38,7 @@ const UserConcerts = ({ listName, listBudget, listId, listConcerts }) => {
 
     return (
         <div className="userListContainer">
-            <button onClick={() => {removeList()}} className="removeList">X</button>
+            <button onClick={() => { removeList() }} className="removeList">X</button>
             <div className="listInfo">
                 <h3>{listName}</h3>
                 <h3>${listBudget}</h3>

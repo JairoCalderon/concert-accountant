@@ -5,11 +5,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getDatabase, ref, onValue, set } from "firebase/database"
 
-
-
 const SearchPage = () => {
     // current list's firebase key id
     const { listID } = useParams();
+
     // api states 
     const [userSearch, setUserSearch] = useState("")
     const [data, setData] = useState([]);
@@ -17,6 +16,7 @@ const SearchPage = () => {
 
     // user's current list // this holds the name
     const [userListArray, setUserListArray] = useState([]);
+
     //creating state to store budget from firebase object
     const [listBudget, setListBudget] = useState(0)
     const [currentConcerts, setCurrentConcerts] = useState([])
@@ -43,7 +43,6 @@ const SearchPage = () => {
         copyOfShowList.forEach(ticket => {
             ticketPrice = ticketPrice + parseFloat(ticket.priceRanges[0].min);
         })
-
         return (
             ticketPrice
         )
@@ -129,7 +128,6 @@ const SearchPage = () => {
     }
 
     useEffect(() => {
-        //#REGION firebase stuff
         //getting list name and budget object from firebase
         onValue(dbRef, (snapshot) => {
             setListBudget(snapshot.val().budget);
@@ -146,7 +144,6 @@ const SearchPage = () => {
             setCurrentConcerts(tempConcertsArray);
 
         })
-        //#endregion
         setRemainingBudget(listBudget);
     }, [])
 
@@ -155,10 +152,8 @@ const SearchPage = () => {
     }, [listBudget])
 
 
-    //#region useEffect for filtering API data into paid events and free events
     useEffect(() => {
         // creating a copy so we dont mutate the original data
-
         const copyOfData = [...data];
 
         const primaryPaidArray = [];
@@ -172,7 +167,6 @@ const SearchPage = () => {
 
         setPaidArray(primaryPaidArray);
     }, [data])
-    //#endregion
 
 
     return (
@@ -213,7 +207,6 @@ const SearchPage = () => {
                             <button disabled={!userSearch}>Search</button>
                         </form>
                         {paidArray.length === 0 ? <p>{apiError}</p> : <EventInfo eventArray={paidArray} listKey={listID} updatePrice={updatePrice} />}
-
 
                     </>
             }
